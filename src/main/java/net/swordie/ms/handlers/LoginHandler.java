@@ -32,6 +32,11 @@ import net.swordie.ms.connection.packet.Login;
 import net.swordie.ms.world.Channel;
 import net.swordie.ms.Server;
 import org.mindrot.jbcrypt.BCrypt;
+import net.swordie.ms.connection.db.DatabaseConnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.ResultSet;
 
 import static net.swordie.ms.enums.InvType.EQUIPPED;
 
@@ -120,10 +125,29 @@ public class LoginHandler {
                 }
             }
         } else {
-            result = LoginType.NotRegistered;
-            success = false;
+            Connection con;
+            try {
+                con = DatabaseConnection.getConnection();
+            } catch (Exception ex) {
+                log.error("ERROR", ex);
+                return;
+            }
+            try {
+             PreparedStatement ps = con.prepareStatement("INSERT INTO users (name, password) VALUES (?, ? )");
+             ps.setString(1, username);
+             ps.setString(2, password);
+             ps.executeUpdate();
+             ps.close();
+             success = false;
+             result = LoginType.NotRegistered;
+                String banMsg = String.format("Your account has been created.");
+                c.write(WvsContext.broadcastMsg(BroadcastMsg.popUpMessage(banMsg)));
+             } catch (SQLException ex) {
+            log.error("ERROR", ex);
+            return;
+            }
         }
-        c.write(Login.checkPasswordResult(success, result, user));
+    c.write(Login.checkPasswordResult(success, result, user));
     }
 
     @Handler(op = InHeader.WORLD_LIST_REQUEST)
