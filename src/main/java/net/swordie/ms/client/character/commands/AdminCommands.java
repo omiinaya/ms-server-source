@@ -52,9 +52,6 @@ import static net.swordie.ms.enums.AccountType.*;
 import static net.swordie.ms.enums.ChatType.*;
 import static net.swordie.ms.enums.InventoryOperation.Add;
 
-/**
- * Created on 12/22/2017.
- */
 public class AdminCommands {
     static final org.apache.log4j.Logger log = LogManager.getRootLogger();
 
