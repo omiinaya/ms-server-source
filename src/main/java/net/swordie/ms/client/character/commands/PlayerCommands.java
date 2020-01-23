@@ -66,4 +66,25 @@ public class PlayerCommands {
             }
         }
     }
+
+    @Command(names = {"rebirth", "rb"}, requiredType = AccountType.Player)
+    public static class Rebirth extends PlayerCommand {
+        public static void execute(Char chr, String[] args) {
+            short id = 0;
+            JobEnum job = JobEnum.getJobById(id);
+            short level = chr.getLevel();
+            if (level == 250) {
+                chr.setStatAndSendPacket(Stat.level, 1);
+                chr.setStatAndSendPacket(Stat.exp, 0);
+                chr.setJob(id);
+                Map<Stat, Object> stats = new HashMap<>();
+                stats.put(Stat.subJob, id);
+                chr.getClient().write(WvsContext.statChanged(stats));
+            }
+            else {
+                chr.chatMessage(Notice2, "You are not Lv.250");
+                return;
+            }
+        }
+    }
 }
