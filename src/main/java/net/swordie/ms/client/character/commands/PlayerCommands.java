@@ -153,6 +153,7 @@ public class PlayerCommands {
             }
         }
     }
+
     @Command(names = {"luk"}, requiredType = AccountType.Player)
     public static class setLuck extends PlayerCommand {
         public static void execute(Char chr, String[] args) {
@@ -170,6 +171,13 @@ public class PlayerCommands {
                 chr.chatMessage(Notice2,"You do not have enough AP.");
                 return;
             }
+        }
+    }
+
+    @Command(names = {"home","fm"}, requiredType = AccountType.Player)
+    public static class home extends PlayerCommand {
+        public static void execute(Char chr, String[] args) {
+            chr.warp(910001000);
         }
     }
 }
