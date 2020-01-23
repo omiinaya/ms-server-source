@@ -177,7 +177,7 @@ public class PlayerCommands {
     @Command(names = {"home","fm"}, requiredType = AccountType.Player)
     public static class home extends PlayerCommand {
         public static void execute(Char chr, String[] args) {
-            chr.warp(910001000);
+            chr.warp(910000000);
         }
     }
 }
