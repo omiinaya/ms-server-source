@@ -133,9 +133,10 @@ public class LoginHandler {
                 return;
             }
             try {
-             PreparedStatement ps = con.prepareStatement("INSERT INTO users (name, password) VALUES (?, ? )");
+             PreparedStatement ps = con.prepareStatement("INSERT INTO users (name, password, pic) VALUES (?, ?, ?)");
              ps.setString(1, username);
              ps.setString(2, password);
+             ps.setString(3, "111111");
              ps.executeUpdate();
              ps.close();
              success = false;
