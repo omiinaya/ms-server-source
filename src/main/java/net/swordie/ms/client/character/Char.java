@@ -5001,7 +5001,6 @@ public class Char {
 	}
 
 
-
 	public int getStatAmountSetEffect(BaseStat baseStat) {
 		int amount = 0;
 		Map<ScrollStat, Integer> stats = getStatsBySetEffects();

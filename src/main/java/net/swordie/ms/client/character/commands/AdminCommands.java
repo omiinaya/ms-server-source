@@ -1,5 +1,6 @@
 package net.swordie.ms.client.character.commands;
 
+import net.swordie.ms.client.Client;
 import net.swordie.ms.Server;
 import net.swordie.ms.client.User;
 import net.swordie.ms.client.character.Char;
@@ -53,6 +54,7 @@ import static net.swordie.ms.enums.ChatType.*;
 import static net.swordie.ms.enums.InventoryOperation.Add;
 
 public class AdminCommands {
+
     static final org.apache.log4j.Logger log = LogManager.getRootLogger();
 
     @Command(names = {"test"}, requiredType = Admin)

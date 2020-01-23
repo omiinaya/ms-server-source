@@ -21,6 +21,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.*;
 
+import static net.swordie.ms.enums.AccountType.Tester;
 import static net.swordie.ms.enums.ChatType.Mob;
 import static net.swordie.ms.enums.ChatType.*;
 
@@ -88,6 +89,85 @@ public class PlayerCommands {
             }
             else {
                 chr.chatMessage(Notice2, "You are not Lv.250");
+                return;
+            }
+        }
+    }
+
+    @Command(names = {"int"}, requiredType = AccountType.Player)
+    public static class setInt extends PlayerCommand {
+        public static void execute(Char chr, String[] args) {
+            int currAp = chr.getStat(Stat.ap); //checks current ap
+            int num = Integer.parseInt(args[1]); //how many ap you want to add
+            int currStat = chr.getStat(Stat.inte); //checks current stat
+            int newInt = currStat+num; //adds num to current stat
+            int apLeft = currAp-num; //removes num from current ap
+
+            if (num <= currAp) { //checks if you have enough ap
+                chr.setStatAndSendPacket(Stat.inte, (short) newInt); //sets ap
+                chr.setStatAndSendPacket(Stat.ap, (short) apLeft); //removes ap
+            }
+            else {
+                chr.chatMessage(Notice2,"You do not have enough AP.");
+                return;
+            }
+        }
+    }
+
+    @Command(names = {"str"}, requiredType = AccountType.Player)
+    public static class setStr extends PlayerCommand {
+        public static void execute(Char chr, String[] args) {
+            int currAp = chr.getStat(Stat.ap); //checks current ap
+            int num = Integer.parseInt(args[1]); //how many ap you want to add
+            int currStat = chr.getStat(Stat.str); //checks current stat
+            int newInt = currStat+num; //adds num to current stat
+            int apLeft = currAp-num; //removes num from current ap
+
+            if (num <= currAp) { //checks if you have enough ap
+                chr.setStatAndSendPacket(Stat.str, (short) newInt); //sets ap
+                chr.setStatAndSendPacket(Stat.ap, (short) apLeft); //removes ap
+            }
+            else {
+                chr.chatMessage(Notice2,"You do not have enough AP.");
+                return;
+            }
+        }
+    }
+
+    @Command(names = {"dex"}, requiredType = AccountType.Player)
+    public static class setDex extends PlayerCommand {
+        public static void execute(Char chr, String[] args) {
+            int currAp = chr.getStat(Stat.ap); //checks current ap
+            int num = Integer.parseInt(args[1]); //how many ap you want to add
+            int currStat = chr.getStat(Stat.dex); //checks current stat
+            int newInt = currStat+num; //adds num to current stat
+            int apLeft = currAp-num; //removes num from current ap
+
+            if (num <= currAp) { //checks if you have enough ap
+                chr.setStatAndSendPacket(Stat.dex, (short) newInt); //sets ap
+                chr.setStatAndSendPacket(Stat.ap, (short) apLeft); //removes ap
+            }
+            else {
+                chr.chatMessage(Notice2,"You do not have enough AP.");
+                return;
+            }
+        }
+    }
+    @Command(names = {"luk"}, requiredType = AccountType.Player)
+    public static class setLuck extends PlayerCommand {
+        public static void execute(Char chr, String[] args) {
+            int currAp = chr.getStat(Stat.ap); //checks current ap
+            int num = Integer.parseInt(args[1]); //how many ap you want to add
+            int currStat = chr.getStat(Stat.luk); //checks current stat
+            int newInt = currStat+num; //adds num to current stat
+            int apLeft = currAp-num; //removes num from current ap
+
+            if (num <= currAp) { //checks if you have enough ap
+                chr.setStatAndSendPacket(Stat.luk, (short) newInt); //sets ap
+                chr.setStatAndSendPacket(Stat.ap, (short) apLeft); //removes ap
+            }
+            else {
+                chr.chatMessage(Notice2,"You do not have enough AP.");
                 return;
             }
         }
