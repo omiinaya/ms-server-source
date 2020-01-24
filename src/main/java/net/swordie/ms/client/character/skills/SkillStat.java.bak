@@ -36,7 +36,7 @@ public enum SkillStat {
     indieMdd,
     indieTerR,
     indieEva,
-    indieEvaR,
+	indieEvaR,
     indieAcc,
     indieBooster,
     indieSpeed,
