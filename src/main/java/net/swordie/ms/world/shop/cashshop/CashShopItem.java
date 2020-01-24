@@ -3,10 +3,8 @@ package net.swordie.ms.world.shop.cashshop;
 import net.swordie.ms.Server;
 import net.swordie.ms.client.Account;
 import net.swordie.ms.client.character.Char;
-import net.swordie.ms.client.character.items.Item;
 import net.swordie.ms.connection.OutPacket;
 import net.swordie.ms.connection.db.FileTimeConverter;
-import net.swordie.ms.loaders.ItemData;
 import net.swordie.ms.util.FileTime;
 
 import javax.persistence.*;
@@ -476,12 +474,13 @@ public class CashShopItem {
     public CashItemInfo toCashItemInfo(Account account, Char chr) {
         CashItemInfo cii = new CashItemInfo();
         cii.setAccountID(account.getId());
-        Item item = ItemData.getItemDeepCopy(getItemID());
-        item.setQuantity((short) (getBundleQuantity() == 0 ? 1 : getBundleQuantity()));
-        cii.setItem(item);
-        cii.setCommodityID(getId());
+        cii.setCashItemSN(new Random().nextLong());
+        cii.setUnsure(1);
+        cii.setCharacterID(chr.getId());
+        cii.setQuantity((short) (getBundleQuantity() == 0 ? 1 : getBundleQuantity()));
+        cii.setItemID(getItemID());
         if (getAvailableDays() > 0) {
-            item.setDateExpire(FileTime.fromDate(LocalDateTime.now().plusDays(getAvailableDays())));
+            cii.setDateExpire(FileTime.fromDate(LocalDateTime.now().plusDays(getAvailableDays())));
         }
         return cii;
     }

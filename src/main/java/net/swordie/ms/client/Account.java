@@ -61,6 +61,8 @@ public class Account {
     private User user;
     @Transient
     private Char currentChr;
+    private int nxPrepaid;
+    private int maplePoints;
 
     public Account(User user, int worldId) {
         this.user = user;
@@ -181,6 +183,18 @@ public class Account {
         this.nxCredit = nxCredit;
     }
 
+    public int getMaplePoints() {
+        return maplePoints;
+    }
+
+    public void setMaplePoints(int maplePoints) {
+        this.maplePoints = maplePoints;
+    }
+
+    public int getNxPrepaid() {
+        return nxPrepaid;
+    }
+
     public void addLinkSkill(LinkSkill linkSkill) {
         removeLinkSkillByOwnerID(linkSkill.getOwnerID());
         getLinkSkills().add(linkSkill);
@@ -203,6 +217,28 @@ public class Account {
 
     public void setLinkSkills(Set<LinkSkill> linkSkills) {
         this.linkSkills = linkSkills;
+    }
+
+    public void addMaplePoints(int points) {
+        int newPoints = getMaplePoints() + points;
+        if (newPoints >= 0) {
+            setMaplePoints(newPoints);
+        }
+    }
+
+    public void deductMaplePoints(int points) {
+        addMaplePoints(-points);
+    }
+
+    public void addNXPrepaid(int prepaid) {
+        int newPrepaid = getNxPrepaid() + prepaid;
+        if (newPrepaid >= 0) {
+            addNXPrepaid(newPrepaid);
+        }
+    }
+
+    public void deductNXPrepaid(int prepaid) {
+        addNXPrepaid(-prepaid);
     }
 
     public void addNXCredit(int credit) {
