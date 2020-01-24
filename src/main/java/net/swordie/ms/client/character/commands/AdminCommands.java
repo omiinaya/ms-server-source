@@ -754,7 +754,6 @@ public class AdminCommands {
     }
 
 
-
     @Command(names = {"getitem"}, requiredType = GameMaster)
     public static class GetItem extends AdminCommand {
         public static void execute(Char chr, String[] args) {
@@ -1675,10 +1674,10 @@ public class AdminCommands {
 
         public static void execute(Char chr, String[] args) {
             chr.setSkillCDBypass(!chr.hasSkillCDBypass());
-            if(chr.hasSkillCDBypass()) {
+            if (chr.hasSkillCDBypass()) {
                 chr.getSkillCoolTimes().keySet().forEach(chr::resetSkillCoolTime);
             }
-            chr.chatMessage(Notice2, "Skill Cooldown bypass: "+ chr.hasSkillCDBypass());
+            chr.chatMessage(Notice2, "Skill Cooldown bypass: " + chr.hasSkillCDBypass());
             chr.dispose();
         }
     }
@@ -1948,7 +1947,7 @@ public class AdminCommands {
             chr.getField().getReactors().forEach(reactor -> chr.chatMessage(reactor.toString()));
         }
     }
-    
+
     @Command(names = {"script"}, requiredType = Tester)
     public static class StartScriptTest extends AdminCommand {
 
@@ -1981,26 +1980,29 @@ public class AdminCommands {
     public static class giveNx extends AdminCommand {
 
         public static void execute(Char chr, String[] args) {
-            String name = args [1];
-            int amount = Integer.valueOf(args [2]);
+            String name = args[1];
+            int amount = Integer.valueOf(args[2]);
             Char other = chr.getWorld().getCharByName(name);
             other.addNx(amount);
         }
     }
 
-    @Command(names = {"tp"}, requiredType = Tester)
-    public static void handleWhisper(Client c, InPacket inPacket) {
-        Char chr = c.getChr();
-        byte type = inPacket.decodeByte();
-        inPacket.decodeInt(); // tick
-        String destName = inPacket.decodeString();
-        Char dest = c.getWorld().getCharByName(destName);
-        if (dest == null) {
-            chr.chatMessage("Character not found.");
-            return;
-        } else {
-        int fieldId = dest.getField().getId();
-            chr.chatMessage("current map id of player is: "+fieldId);
+    @Command(names = {"tp, warp"}, requiredType = Tester)
+    public static class playerTp extends AdminCommand {
+
+        public static void execute(Client c, InPacket inPacket) {
+            Char chr = c.getChr();
+            byte type = inPacket.decodeByte();
+            inPacket.decodeInt(); // tick
+            String destName = inPacket.decodeString();
+            Char dest = c.getWorld().getCharByName(destName);
+            if (dest == null) {
+                chr.chatMessage("Character not found.");
+                return;
+            } else {
+                int fieldId = dest.getField().getId();
+                chr.chatMessage("current map id of player is: " + fieldId);
+            }
         }
     }
 
