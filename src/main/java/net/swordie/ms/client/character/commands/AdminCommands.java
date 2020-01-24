@@ -2004,7 +2004,7 @@ public class AdminCommands {
         }
     }
 
-    @Command(names = {"warp, teleport"}, requiredType = Tester)
+    @Command(names = {"warpto"}, requiredType = Tester)
     public static class warpTo extends AdminCommand {
 
         public static void execute(Char chr, String[] args) {
@@ -2015,8 +2015,9 @@ public class AdminCommands {
                 return;
             }
             else {
+                chr.chatMessage("Test.");
                 int fieldId = player.getField().getId(); //get map id of the player
-                chr.warp(1, fieldId); //move to the map that player is currently in.
+                chr.warp(fieldId); //move to the map that player is currently in.
             }
         }
     }
