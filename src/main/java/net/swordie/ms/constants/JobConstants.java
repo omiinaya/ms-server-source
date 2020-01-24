@@ -269,13 +269,6 @@ public class JobConstants {
         JETT2(570, 0),
         JETT3(571, 0),
         JETT4(572, 0),
-		BRAWLER_NEW(580, 0),
-        MARAUDER_NEW(581, 0),
-        BUCCANEER_NEW(582, 0),
-        GUNSLINGER_NEW(590, 0),
-        OUTLAW_NEW(591, 0),
-        CORSAIR_NEW(592, 0),
-        // 580, 581, 582 - bucc
         MANAGER(800, 0),
         GM(900, 0),
         SUPERGM(910, 0),
@@ -306,7 +299,6 @@ public class JobConstants {
         ARAN2(2110, 2000),
         ARAN3(2111, 2000),
         ARAN4(2112, 2000),
-		EVAN(2200, 2001),
         EVAN1(2210, 2001),
         EVAN2(2212, 2001),
         EVAN3(2214, 2001),
@@ -379,15 +371,10 @@ public class JobConstants {
         MIHILE4(5112, 5000),
         KAISER(6000, 6000),
         ANGELIC_BUSTER(6001, 6001),
-		CADENA(6002, 6002),
         KAISER1(6100, 6000),
         KAISER2(6110, 6000),
         KAISER3(6111, 6000),
         KAISER4(6112, 6000),
-        CADENA1(6400, 6002),
-        CADENA2(6410, 6002),
-        CADENA3(6411, 6002),
-        CADENA4(6412, 6002),
         ANGELIC_BUSTER1(6500, 6001),
         ANGELIC_BUSTER2(6510, 6001),
         ANGELIC_BUSTER3(6511, 6001),
@@ -410,16 +397,6 @@ public class JobConstants {
         KINESIS_2(14210, 14000),
         KINESIS_3(14211, 14000),
         KINESIS_4(14212, 14000),
-		ILLIUM(15000, 15000),
-        ARK(15001, 15001),
-        ILLIUM1(15200, 15000),
-        ILLIUM2(15210, 15000),
-        ILLIUM3(15211, 15000),
-        ILLIUM4(15212, 15000),
-        ARK1(15500, 15001),
-        ARK2(15510, 15001),
-        ARK3(15511, 15001),
-        ARK4(15512, 15001),
         EMPTY_0(30000, 0),
         V_SKILLS(40000, 0),
         EMPTY_2(40001, 0),
@@ -923,18 +900,6 @@ public class JobConstants {
         return jobId / 100 == 31 || jobId == 3001;
     }
 
-	public static boolean isCadena(short jobId) {
-        return jobId == JobEnum.CADENA.getJobId() || jobId == JobEnum.CADENA1.getJobId() || jobId == JobEnum.CADENA2.getJobId() || jobId == JobEnum.CADENA3.getJobId() || jobId == JobEnum.CADENA4.getJobId();
-    }
-
-    public static boolean isIllium(short jobId) {
-        return jobId == JobEnum.ILLIUM.getJobId() || jobId == JobEnum.ILLIUM1.getJobId() || jobId == JobEnum.ILLIUM2.getJobId() || jobId == JobEnum.ILLIUM3.getJobId() || jobId == JobEnum.ILLIUM4.getJobId();
-    }
-
-    public static boolean isArk(short jobId) {
-        return jobId == JobEnum.ARK.getJobId() || jobId == JobEnum.ARK1.getJobId() || jobId == JobEnum.ARK2.getJobId() || jobId == JobEnum.ARK3.getJobId() || jobId == JobEnum.ARK4.getJobId();
-    }
-
     public static boolean isBeginnerJob(short jobId) {
         switch (jobId) {
             case 8001:
@@ -952,19 +917,6 @@ public class JobConstants {
             case 2003:
             case 2004:
             case 2005:
-			case 3001:
-            case 3002:
-            case 4001:
-            case 4002:
-            case 5000:
-            case 6000:
-            case 6001:
-            case 6002:
-            case 8001:
-            case 13000:
-            case 14000:
-            case 15000:
-            case 15001:
                 return true;
             default:
                 return jobId % 1000 == 0 || jobId / 100 == 8000;
@@ -980,7 +932,14 @@ public class JobConstants {
             return getEvanJobLevel(jobId);
         }
         if (isDualBlade(jobId)) {
-            prefix = (jobId - 430) / 2;
+            prefix = (jobId % 10) + 2;
+            if (prefix < 2) {
+                return 0;
+            } else if (prefix <= 6) {
+                return jobId % 10 + 2;
+            }
+        } else {
+            prefix = jobId % 10;
         }
         return prefix <= 2 ? prefix + 2 : 0;
     }
@@ -1048,32 +1007,32 @@ public class JobConstants {
         return isDemon(job) || isAngelicBuster(job) || isZero(job) || isKinesis(job) || isKanna(job);
     }
 
-    public boolean isWarriorEquipJob(short jobID) {
+    public static boolean isWarriorEquipJob(short jobID) {
         return isAdventurerWarrior(jobID) || isPinkBean(jobID) || isDawnWarrior(jobID) || isMihile(jobID) ||
                 isAran(jobID) || isKaiser(jobID) || isBlaster(jobID) || isDemon(jobID) || isHayato(jobID) ||
                 isZero(jobID);
 
     }
 
-    public boolean isMageEquipJob(short jobID) {
+    public static boolean isMageEquipJob(short jobID) {
         return isBeastTamer(jobID) || isKinesis(jobID) || isAdventurerMage(jobID) || isBlazeWizard(jobID) ||
                 isEvan(jobID) || isLuminous(jobID) || isBattleMage(jobID) || isKanna(jobID);
     }
 
-    public boolean isArcherEquipJob(short jobID) {
+    public static boolean isArcherEquipJob(short jobID) {
         return isAdventurerArcher(jobID) || isWindArcher(jobID) || isMercedes(jobID) || isWildHunter(jobID);
     }
 
-    public boolean isThiefEquipJob(short jobID) {
+    public static boolean isThiefEquipJob(short jobID) {
         return isAdventurerThief(jobID) || isNightWalker(jobID) || isPhantom(jobID) || isXenon(jobID);
     }
 
-    public boolean isPirateEquipJob(short jobID) {
+    public static boolean isPirateEquipJob(short jobID) {
         return isAdventurerPirate(jobID) || isThunderBreaker(jobID) || isShade(jobID) || isAngelicBuster(jobID) ||
                 isXenon(jobID) || isMechanic(jobID) || isJett(jobID);
     }
 
-    public boolean isUsingXbow(short jobId) {
+    public static boolean isUsingXbow(short jobId) {
         return isWildHunter(jobId) || (isAdventurerArcher(jobId) && (jobId / 10) % 10 == 2);
     }
 }

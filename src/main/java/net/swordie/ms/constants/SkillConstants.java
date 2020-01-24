@@ -211,16 +211,17 @@ public class SkillConstants {
 
     public static boolean isEvanForceSkill(int skillId) {
         switch (skillId) {
-			case 400021046:
-            case 400021012:
-            case 80001894:
-            case 22141011:
             case 22140022:
-			case 22111017:
             case 22111011:
             case 22111012:
             case 22110022:
             case 22110023:
+            case 22111017:
+            case 80001894:
+            case 22171062:
+            case 22171063:
+            case 22141011:
+            case 22141012:
                 return true;
         }
         return false;
