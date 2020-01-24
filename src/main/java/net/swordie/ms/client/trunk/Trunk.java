@@ -147,9 +147,6 @@ public class Trunk {
         }
     }
 
-    public CashItemInfo getLockerItemBySn(long sn) {
-        return Util.findWithPred(getLocker(), cii -> cii.getItem() != null && cii.getItem().getId() == sn);
-    }
 
     public boolean isFull() {
         return getLocker().size() >= GameConstants.MAX_LOCKER_SIZE;
