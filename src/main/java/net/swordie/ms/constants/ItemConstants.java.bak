@@ -1516,7 +1516,7 @@ public class ItemConstants {
             case 2439897:// Valentine Damage Skin
             case 2439898:// Valentine Damage Skin (Untradable)
             case 2439899:// Valentine Damage Skin (30 Day)
-                return 1365;
+                return 1365;            
             default:
                 return 0;
         }
