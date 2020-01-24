@@ -1999,7 +1999,7 @@ public class AdminCommands {
             }
             else {
                 int fieldId = player.getField().getId();
-                char.chatMessage("Map ID: "+fieldId);
+                chr.chatMessage("Map ID: "+fieldId);
             }
         }
     }
