@@ -8,4 +8,4 @@ added @home
 
 added @rebirth
 
-added DatabaseConnections for old style database reaing and writing.
+added DatabaseConnections for old style database reading and writing.
