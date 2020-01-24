@@ -1987,8 +1987,8 @@ public class AdminCommands {
         }
     }
 
-    @Command(names = {"playerfind"}, requiredType = Tester)
-    public static class playerFind extends AdminCommand {
+    @Command(names = {"locationid"}, requiredType = Tester)
+    public static class locationId extends AdminCommand {
 
         public static void execute(Char chr, String[] args) {
             String input = args[1]; //take string as argument 1
@@ -2003,7 +2003,7 @@ public class AdminCommands {
             }
         }
     }
-    
+
     @Command(names = {"warp, teleport"}, requiredType = Tester)
     public static class warpTo extends AdminCommand {
 
