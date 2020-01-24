@@ -2003,4 +2003,21 @@ public class AdminCommands {
             }
         }
     }
+    
+    @Command(names = {"warp, teleport"}, requiredType = Tester)
+    public static class warpTo extends AdminCommand {
+
+        public static void execute(Char chr, String[] args) {
+            String input = args[1]; //take string as argument 1
+            Char player = chr.getWorld().getCharByName(input); //get player by input name
+            if (player == null) { //if not online, error.
+                chr.chatMessage("Character not found.");
+                return;
+            }
+            else {
+                int fieldId = player.getField().getId(); //get map id of the player
+                chr.warp(1, fieldId); //move to the map that player is currently in.
+            }
+        }
+    }
 }
