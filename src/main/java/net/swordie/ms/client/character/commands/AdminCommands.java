@@ -1987,37 +1987,20 @@ public class AdminCommands {
         }
     }
 
-    @Command(names = {"tp, warp"}, requiredType = Tester)
-    public static class playerTp extends AdminCommand {
+    @Command(names = {"playerfind"}, requiredType = Tester)
+    public static class playerFind extends AdminCommand {
 
-        public static void execute(Client c, InPacket inPacket) {
-            Char chr = c.getChr();
-            byte type = inPacket.decodeByte();
-            inPacket.decodeInt(); // tick
-            String destName = inPacket.decodeString();
-            Char dest = c.getWorld().getCharByName(destName);
-            if (dest == null) {
+        public static void execute(Char chr, String[] args) {
+            String input = args[1]; //take string as argument 1
+            Char player = chr.getWorld().getCharByName(input);
+            if (player == null) {
                 chr.chatMessage("Character not found.");
                 return;
-            } else {
-                int fieldId = dest.getField().getId();
-                chr.chatMessage("current map id of player is: " + fieldId);
+            }
+            else {
+                int fieldId = player.getField().getId();
+                char.chatMessage("Map ID: "+fieldId);
             }
         }
     }
-
-                /*
-                int fieldId = dest.getField().getId();
-                int channel = dest.getClient().getChannel();
-                if (channel != chr.getClient().getChannel()) {
-                    chr.chatMessage("%s is in channel %s-%d.", dest.getName(), dest.getWorld().getName(), channel);
-                } else {
-                    String fieldString = StringData.getMapStringById(fieldId);
-                    if (fieldString == null) {
-                        fieldString = "Unknown field.";
-                    }
-                    chr.chatMessage("%s is at %s.", dest.getName(), fieldString);
-                }
-                break;
-                */
 }
