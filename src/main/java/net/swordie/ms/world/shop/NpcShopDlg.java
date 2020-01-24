@@ -39,8 +39,6 @@ public class NpcShopDlg {
 		outPacket.encodeInt(getSelectNpcItemID());
 		outPacket.encodeInt(getNpcTemplateID());
 		outPacket.encodeInt(getStarCoin());
-		outPacket.encodeInt(getShopVerNo());
-		outPacket.encodeInt(0);
 		// start gms only
 		boolean hasQuest = false;
 		outPacket.encodeByte(hasQuest);
@@ -50,6 +48,7 @@ public class NpcShopDlg {
 			outPacket.encodeString(""); // questKey?
 		}
 		// end gms only
+		outPacket.encodeInt(getShopVerNo());
 		outPacket.encodeShort(getItems().size());
 		getItems().forEach(item -> item.encode(outPacket));
 	}
