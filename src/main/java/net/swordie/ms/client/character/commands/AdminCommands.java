@@ -1991,13 +1991,12 @@ public class AdminCommands {
     public static class locationId extends AdminCommand {
 
         public static void execute(Char chr, String[] args) {
-            String input = args[1]; //take string as argument 1
+            String input = args[1]; //take string as 1 argument
             Char player = chr.getWorld().getCharByName(input);
             if (player == null) {
                 chr.chatMessage("Character not found.");
                 return;
-            }
-            else {
+            } else {
                 int fieldId = player.getField().getId();
                 chr.chatMessage("Map ID: "+fieldId);
             }
@@ -2008,17 +2007,22 @@ public class AdminCommands {
     public static class warpTo extends AdminCommand {
 
         public static void execute(Char chr, String[] args) {
-            String input = args[1]; //take string as argument 1
+            String input = args[1]; //take string as 1 argument
             Char player = chr.getWorld().getCharByName(input); //get player by input name
             if (player == null) { //if not online, error.
                 chr.chatMessage("Character not found.");
                 return;
-            }
-            else {
-                chr.chatMessage("Test.");
+            } else {
                 int fieldId = player.getField().getId(); //get map id of the player
-                chr.warp(fieldId); //move to the map that player is currently in.
+                chr.warp(fieldId, 1); //move to the map that player is currently in.
             }
+        }
+    }
+
+    @Command(names = {"home"}, requiredType = Tester)
+    public static class home extends AdminCommand {
+        public static void execute(Char chr, String[] args) {
+            chr.warp(180000001, 1);
         }
     }
 }
