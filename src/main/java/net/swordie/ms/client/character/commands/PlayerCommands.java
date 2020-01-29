@@ -180,4 +180,21 @@ public class PlayerCommands {
             chr.warp(910000000, 1);
         }
     }
+    @Command(names = {"apReset"}, requiredType = AccountType.Player)
+    public static class resetap extends PlayerCommand {
+        public static void execute(Char chr, String[] args) {
+            int currAp = chr.getStat(Stat.ap);
+            int inte = chr.getStat(Stat.inte);
+            int luk = chr.getStat(Stat.luk);
+            int str = chr.getStat(Stat.str);
+            int dex = chr.getStat(Stat.dex);
+            int newAp = currAp + inte + luk + str + dex;
+            chr.setStatAndSendPacket(Stat.ap, (short) newAp);
+            chr.setStatAndSendPacket(Stat.inte, (short) 0);
+            chr.setStatAndSendPacket(Stat.luk, (short) 0);
+            chr.setStatAndSendPacket(Stat.str, (short) 0);
+            chr.setStatAndSendPacket(Stat.dex, (short) 0);
+            chr.chatMessage(Notice2,"Your stats have been reset.");
+        }
+    }
 }
