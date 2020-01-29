@@ -6,7 +6,9 @@ added @stat commands
 
 added @home
 
-added @rebirth 
+added @rebirth
+
+added @apReset
 
 added !locationId to find player map id
 
